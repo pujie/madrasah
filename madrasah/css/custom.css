@@ -80,6 +80,10 @@
 	left:10px;
 	position: absolute;
 }
+.menu_container{
+	position: relative;
+	height: 20px;
+}
 .drop_menus{
 	background: black;
 	color: white;

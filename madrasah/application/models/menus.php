@@ -4,7 +4,8 @@ class Menus extends CI_Model{
 		parent::__construct();
 	}
 	function get_drop_menus(){
-		$menus = '<div id="categories"" class="drop_menus">';
+		$menus = '<div class="menu_container">';
+		$menus.= '<div id="categories"" class="drop_menus">';
 		$menus.= 'Categories';
 		$menus.= '<ul>';
 		$menus.= '<li>' . anchor('front_office/show_classes','Classes',array('class'=>'text_link')) . '</li>';
@@ -20,6 +21,7 @@ class Menus extends CI_Model{
 		$menus.= '<li>News</li>';
 		$menus.= '<li>About</li>';
 		$menus.= '</ul>';
+		$menus.= '</div>';
 		$menus.= '</div>';
 		return $menus;
 	}
