@@ -1,0 +1,131 @@
+#mybody{
+	height:500px;
+	overflow-y:scroll;
+	overflow-x:hidden;
+	display:block;
+}
+#myhead{
+	display:block;
+}
+.col_name{
+	width: 200px;
+	display:block;
+}
+.col_address{
+	width: 600px;
+}
+#client_dialog{
+	display:none;
+}
+.common_paragraph{
+	font-size: 12px;
+	font-family: verdana;
+}
+.general_form{
+	font-size: 12px;
+	font-family: verdana;
+}
+.link{
+	padding-right:8px;
+}
+.text_link{
+	text-decoration:none;
+}
+/*text boxes*/
+
+.text_float_medium{
+	float:left;
+	width:100px;
+	text-align:right;
+	margin-right:0.2em;
+}
+
+/* divs */
+
+.header{
+	background-image: linear-gradient(bottom, darkkhaki, blanchedalmond );
+	background-image: -moz-linear-gradient(bottom,darkkhaki, blanchedalmond );
+	background-image: -webkit-linear-gradient(bottom, darkkhaki, blanchedalmond );
+	background-image: -o-linear-gradient(bottom, darkkhaki, blanchedalmond );
+	background-image: -ms-linear-gradient(bottom, darkkhaki, blanchedalmond );
+	border-radius: 4px 4px 0px 0px;
+	-moz-border-radius: 4px 4px 0px 0px;
+	-webkit-border-radius: 4px 4px 0px 0px;
+	-o-border-radius: 4px 4px 0px 0px;
+	-ms-border-radius: 4px 4px 0px 0px;
+	padding: 10px 10px 10px 10px;
+	color: blue;
+}
+.footer{
+	padding: 2px 2px 2px 2px;
+	background:black;
+	border-radius: 4px 4px 4px 4px;
+	-moz-border-radius: 4px 4px 4px 4px;
+	-webkit-border-radius: 4px 4px 4px 4px;
+	-o-border-radius: 4px 4px 4px 4px;
+	-ms-border-radius: 4px 4px 4px 4px;
+	position:absolute;
+	bottom:0;
+}
+
+.menus{
+	font-size: 12px;
+}
+
+#campus{
+	left: 110px;
+	position: absolute;
+}
+#categories{
+	left:10px;
+	position: absolute;
+}
+.drop_menus{
+	background: black;
+	color: white;
+	width: 100px;
+	text-align: center;
+}
+.drop_menus:hover{
+	width: 100px;
+	background: darkgray;
+	color:red;
+	cursor:pointer;
+}
+.drop_menus:hover ul li{
+	display:block;
+	cursor:pointer;
+	color: white;
+	background: darkseagreen;
+	font-size: 12px;
+	width:100px;
+}
+.drop_menus ul{
+	margin-top:-2px;
+	margin-left:-40px;
+	margin-bottom:0px;
+	padding-bottom: 4px;
+}
+.drop_menus ul li{
+	list-style:none;
+	display:none;
+	color: white;
+	background: blue;
+	width:100px;
+}
+.drop_menus ul li:hover{
+	background:gold;
+	color: black;
+	width:100px;
+}
+/* tables */
+.common_table{
+	width: 100%;
+}
+.common_table thead{
+	background:black;
+	color: white;
+}
+.common_table tbody tr:nth-child(2n+1){
+	background: silver;
+}
