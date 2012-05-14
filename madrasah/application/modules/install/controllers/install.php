@@ -165,32 +165,20 @@ class Install extends CI_Controller{
 		
 		$query = 'drop table if exists ' . $db_prefix . 'ci_sessions; ';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'drop ci_sessions success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'drop ci_sessions error ...<br />';
 		}
 		
 		$query = 'create table ' . $db_prefix . 'ci_sessions ';
 		$query.= '(session_id varchar(40) primary key default 0,ip_address varchar(16) default 0,user_agent varchar(100), last_activity int(10) unsigned default 0, user_data text)';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'create table ci_sessions success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'create table ci_sessions error ...<br />';
 		}
 		
 		$query = 'drop table if exists ' . $db_prefix . 'users; ';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'drop table users success <br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'drop table users error <br />';
 		}
 		$query = 'create table ' . $db_prefix . 'users ';
@@ -201,32 +189,20 @@ class Install extends CI_Controller{
 		salt varchar(40), 
 		status varchar(1))';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'create table users success <br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'create table users error <br />';
 		}
 
 		$query = 'drop table if exists ' . $db_prefix . 'modules; ';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'drop modules success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'drop modules error ...<br />';
 		}
 		
 		$query = 'create table ' . $db_prefix . 'modules ';
 		$query.= '(id int primary key auto_increment,name varchar(50),state varchar(1) default 0 comment "status of this modul",chapter_description  text)';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'create table modules success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'create table modules error ...<br />';
 		}
 		
@@ -234,11 +210,7 @@ class Install extends CI_Controller{
 		
 		$query = 'drop table if exists ' . $db_prefix . 'students; ';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'drop students success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'drop students error ...<br />';
 		}
 		
@@ -265,43 +237,27 @@ class Install extends CI_Controller{
 			mother_name varchar(20),
 			mother_occupation varchar(20))';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'create table students success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'create table students error ...<br />';
 		}
 
 		$query = 'drop table if exists ' . $db_prefix . 'seasons; ';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'drop seasons success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'drop seasons error ...<br />';
 		}
 		
 		$query = 'create table ' . $db_prefix . 'seasons ';
 		$query.= '(id int primary key auto_increment,name varchar(50),season_description  text)';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'create table seasons success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'create table seasons error ...<br />';
 		}
 		
 		
 		$query = 'drop table if exists ' . $db_prefix . 'classes; ';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'drop classes success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'drop classes error ...<br />';
 		}
 		
@@ -310,22 +266,14 @@ class Install extends CI_Controller{
 			name varchar(50),
 			class_description  text)';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'create table classes success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'create table classes error ...<br />';
 		}
 
 
 		$query = 'drop table if exists ' . $db_prefix . 'classes_students; ';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'drop classes_students success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'drop classes_students error ...<br />';
 		}
 		
@@ -333,55 +281,35 @@ class Install extends CI_Controller{
 		$query.= '(class_id int ,
 			student_id int,dt_year varchar(4))';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'create table classes_students success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'create table classes_students error ...<br />';
 		}
 		
 		
 		$query = 'drop table if exists ' . $db_prefix . 'lessons; ';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'drop lessons success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'drop lessons error ...<br />';
 		}
 		
 		$query = 'create table ' . $db_prefix . 'lessons ';
 		$query.= '(id int primary key auto_increment,name varchar(50),lesson_description  text)';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'create table lessons success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'create table lessons error ...<br />';
 		}
 		
 		
 		$query = 'drop table if exists ' . $db_prefix . 'teachers; ';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'drop teachers success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'drop teachers error ...<br />';
 		}
 		
 		$query = 'create table ' . $db_prefix . 'teachers ';
 		$query.= '(id int primary key auto_increment,name varchar(50),teacher_description  text)';
 		$result = $this->db->query($query);
-		if($result){
-			echo 'create table teachers success ...<br />';
-		}
-		else 
-		{
+		if(!$result){
 			echo 'create table teachers error ...<br />';
 		}
 		
