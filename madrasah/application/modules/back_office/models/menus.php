@@ -8,7 +8,14 @@ class Menus extends CI_Model{
 		$menus.= anchor('moduls','Modules','class="button"');
 		$menus.= anchor('classes','Classes','class="button"');
 		$menus.= anchor('students','Students','class="button"');
+		$menus.= anchor('teachers','Teachers','class="button"');
+		$menus.= anchor('lessons','Lessons','class="button"');
+		$menus.= anchor('seasons','Seasons','class="button"');
 		$menus.= '</div>';
+		return $menus;
+	}
+	function get_bottom_menus(){
+		$menus = anchor('back_office/logout','Log Out','class="button"');
 		return $menus;
 	}
 }

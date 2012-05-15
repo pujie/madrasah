@@ -1,5 +1,6 @@
 <?php
 echo $menus;
+echo $navigators;
 echo '<table class="common_table">';
 echo '<thead>';
 echo '<tr><th>Nick Name</th><th>First Name</th><th>Last Name</th><th>Sex</th><th colspan=2>Action</th></tr>';
@@ -11,8 +12,8 @@ foreach ($students as $student){
 	$table_row.= '<td>' . $student->first_name . '</td>';
 	$table_row.= '<td>' . $student->last_name . '</td>';
 	$table_row.= '<td>' . $sex . '</td>';
-	$table_row.= '<td>' . anchor('students/edit/' . $student->id,'Edit','class="text_link"') . '</td>';
-	$table_row.= '<td>' . anchor('students/remove/' . $student->id,'Edit','class="text_link"') . '</td>';
+	$table_row.= '<td>' . anchor('students/edit/id/' . $student->id,'Edit','class="text_link"') . '</td>';
+	$table_row.= '<td>' . anchor('students/remove/id/' . $student->id,'Remove','class="text_link"') . '</td>';
 	$table_row.= '</tr>';
 	echo $table_row;
 }

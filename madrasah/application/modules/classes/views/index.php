@@ -1,5 +1,6 @@
 <?php
 echo $menus;
+echo $navigators;
 
 echo '<table class="common_table">';
 echo '<thead>';

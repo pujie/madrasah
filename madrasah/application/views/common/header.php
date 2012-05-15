@@ -26,6 +26,12 @@ $(document).ready(function(){
 	echo '<h1>' . $header . '</h1>';
 	$sub_header = (isset($param_sub_header))?$param_sub_header:'';
 	echo '<h4>' . $sub_header . '</h4>';
+	echo '<div class="header_info">';
+	$info = (isset($param_info))?$param_info:'';
+	echo '<div>' . $info . '</div>';
+	$properties = (isset($param_properties))?$param_properties:'';
+	echo '<div>' . $properties . '</div>';
+	echo '</div>';
 	echo '</div>';
 ?>
 </head>

@@ -9,7 +9,7 @@ class Back_office extends CI_Controller{
 			$menus = new Menus();
 			$header_data = array('param_title'=>'Back Office','param_header'=>'Back Office');
 			$data = array('menus'=>$menus->get_menus());
-			$footer_data = array('param_menu'=>anchor('home','Home','class="button"') . anchor('back_office/logout','Logout','class="button"'));
+			$footer_data = array('param_menu'=>$this->menus->get_bottom_menus());
 			$this->load->view('common/header',$header_data);
 			$this->load->view('back_office/index',$data);
 			$this->load->view('common/footer',$footer_data);

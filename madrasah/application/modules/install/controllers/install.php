@@ -39,12 +39,15 @@ class Install extends CI_Controller{
 				}
 				break;
 			case 'create_tables':
-				$this->create_tables();
-				redirect('install/index/create_admin');
+				if($this->write_library_autoload()){
+					if($this->create_tables()){
+						redirect('install/index/create_admin');
+					}
+				}
 				break;
 			case 'create_admin':
 				$this->create_admin();
-				if(!$this->write_autoload()){
+				if(!$this->write_model_autoload()){
 					echo 'autoload file should be writable ...';
 					break;
 				}
@@ -135,10 +138,25 @@ class Install extends CI_Controller{
 			return FALSE;
 		}
 	}
-	function write_autoload(){
+	function write_library_autoload(){
 		$data ='<?php  if ( ! defined(\'BASEPATH\')) exit(\'No direct script access allowed\');
 		$autoload[\'packages\'] = array(APPPATH.\'third_party\');
-		$autoload[\'libraries\'] = array(\'database\',\'datamapper\',\'session\',\'common\',\'auth\');
+		$autoload[\'libraries\'] = array(\'database\',\'datamapper\',\'pagination\',\'session\',\'common\',\'auth\');
+		$autoload[\'helper\'] = array(\'url\',\'form\',\'date\',\'file\',\'directory\');
+		$autoload[\'config\'] = array();
+		$autoload[\'language\'] = array();
+		$autoload[\'model\'] = array();';
+		if(write_file('./application/config/autoload.php',$data)){
+			return TRUE;
+		}
+		else{
+			return FALSE;
+		}
+	}
+	function write_model_autoload(){
+		$data ='<?php  if ( ! defined(\'BASEPATH\')) exit(\'No direct script access allowed\');
+		$autoload[\'packages\'] = array(APPPATH.\'third_party\');
+		$autoload[\'libraries\'] = array(\'database\',\'datamapper\',\'pagination\',\'session\',\'common\',\'auth\');
 		$autoload[\'helper\'] = array(\'url\',\'form\',\'date\',\'file\',\'directory\');
 		$autoload[\'config\'] = array();
 		$autoload[\'language\'] = array();
@@ -167,6 +185,7 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'drop ci_sessions error ...<br />';
+			return false;
 		}
 		
 		$query = 'create table ' . $db_prefix . 'ci_sessions ';
@@ -174,12 +193,14 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'create table ci_sessions error ...<br />';
+			return false;
 		}
 		
 		$query = 'drop table if exists ' . $db_prefix . 'users; ';
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'drop table users error <br />';
+			return false;
 		}
 		$query = 'create table ' . $db_prefix . 'users ';
 		$query.= '(id int primary key auto_increment, 
@@ -191,12 +212,14 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'create table users error <br />';
+			return false;
 		}
 
 		$query = 'drop table if exists ' . $db_prefix . 'modules; ';
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'drop modules error ...<br />';
+			return false;
 		}
 		
 		$query = 'create table ' . $db_prefix . 'modules ';
@@ -204,6 +227,7 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'create table modules error ...<br />';
+			return false;
 		}
 		
 		
@@ -212,6 +236,7 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'drop students error ...<br />';
+			return false;
 		}
 		
 		$query = 'create table ' . $db_prefix . 'students ';
@@ -239,19 +264,28 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'create table students error ...<br />';
+			return false;
 		}
 
 		$query = 'drop table if exists ' . $db_prefix . 'seasons; ';
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'drop seasons error ...<br />';
+			return false;
 		}
 		
 		$query = 'create table ' . $db_prefix . 'seasons ';
-		$query.= '(id int primary key auto_increment,name varchar(50),season_description  text)';
+		$query.= '(
+			id int primary key auto_increment,
+			name varchar(50),
+			date1 date comment "the date this season start",
+			date2 date comment "the date this season end",
+			season_description  text
+		)';
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'create table seasons error ...<br />';
+			return false;
 		}
 		
 		
@@ -259,6 +293,7 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'drop classes error ...<br />';
+			return false;
 		}
 		
 		$query = 'create table ' . $db_prefix . 'classes ';
@@ -268,6 +303,7 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'create table classes error ...<br />';
+			return false;
 		}
 
 
@@ -275,6 +311,7 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'drop classes_students error ...<br />';
+			return false;
 		}
 		
 		$query = 'create table ' . $db_prefix . 'classes_students ';
@@ -283,6 +320,7 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'create table classes_students error ...<br />';
+			return false;
 		}
 		
 		
@@ -290,6 +328,7 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'drop lessons error ...<br />';
+			return false;
 		}
 		
 		$query = 'create table ' . $db_prefix . 'lessons ';
@@ -297,6 +336,7 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'create table lessons error ...<br />';
+			return false;
 		}
 		
 		
@@ -304,16 +344,35 @@ class Install extends CI_Controller{
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'drop teachers error ...<br />';
+			return false;
 		}
 		
 		$query = 'create table ' . $db_prefix . 'teachers ';
-		$query.= '(id int primary key auto_increment,name varchar(50),teacher_description  text)';
+		$query.= '(id int primary key auto_increment,
+			nrp varchar(20),
+			first_name varchar(20),
+			middle_name varchar(20),
+			last_name varchar(20),
+			nick_name varchar(20),
+			sex varchar(1),
+			birthday date,
+			place_of_birth varchar(20),
+			address varchar(60),
+			address2 varchar(60),
+			city varchar(20),
+			phone_area varchar(5),
+			phone varchar(15),
+			handphone varchar(15),
+			email varchar(30),
+			teacher_description  text
+			)';
 		$result = $this->db->query($query);
 		if(!$result){
 			echo 'create table teachers error ...<br />';
+			return false;
 		}
 		
-		
+		return true;
 	}
 	function create_admin(){
 		$params = $this->input->post();

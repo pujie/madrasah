@@ -9,7 +9,7 @@ class Menus extends CI_Model{
 		$menus.= 'Categories';
 		$menus.= '<ul>';
 		$menus.= '<li>' . anchor('front_office/show_classes','Classes',array('class'=>'text_link')) . '</li>';
-		$menus.= '<li>' . anchor('front_office/show_students','Students',array('class'=>'text_link')) . '</li>';
+		$menus.= '<li>' . anchor('front_office/show_students/per_page/2/page/0','Students',array('class'=>'text_link')) . '</li>';
 		$menus.= '<li>' . anchor('front_office/show_lessons','Lessons',array('class'=>'text_link')) . '</li>';
 		$menus.= '<li>' . anchor('front_office/show_teachers','Teachers',array('class'=>'text_link')) . '</li>';
 		$menus.= '<li>' . anchor('front_office/show_seasons','Seasons',array('class'=>'text_link')) . '</li>';
