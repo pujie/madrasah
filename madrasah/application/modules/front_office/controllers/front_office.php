@@ -33,10 +33,10 @@ class Front_office extends CI_Controller{
 		$students = new Student();
 		$students->get($uri['per_page'],$uri['page']);
 		$count = $students->count();
-		$pagination_config['base_url']=base_url() . 'index.php/front_office/show_students/per_page/' . $uri['per_page'] . '/page/';
+		$pagination_config['base_url']=base_url() . 'index.php/front_office/show_students/per_page/' . $uri['per_page'] . '/class/0/season/0/page/';
 		$pagination_config['total_rows']=$count;
 		$pagination_config['per_page']=$uri['per_page'];
-		$pagination_config['uri_segment'] = 6;
+		$pagination_config['uri_segment'] = 10;
 		$this->pagination->initialize($pagination_config);
 		$header_data = array(
 			'param_title'=>'Front Office',
@@ -52,11 +52,17 @@ class Front_office extends CI_Controller{
 	}
 	function student_handler(){
 		$params = $this->input->post();
+		if(isset($params['class'])){
+			redirect('front_office/show_students/per_page/' . $params['per_page'] . '/class/0/season/0/page/0/search/' . $params['find']);
+		}
+		if(isset($params['season'])){
+			redirect('front_office/show_students/per_page/' . $params['per_page'] . '/class/0/season/0/page/0/search/' . $params['find']);
+		}
 		if(isset($params['search'])){
-			redirect('front_office/show_students/per_page/' . $params['row_per_page'] . '/page/0/search/' . $params['find']);
+			redirect('front_office/show_students/per_page/' . $params['per_page'] . '/class/0/season/0/page/0/search/' . $params['find']);
 		}
 		if(isset($params['row_per_page'])){
-			redirect('front_office/show_students/per_page/' . $params['per_page'] . '/page/0');
+			redirect('front_office/show_students/per_page/' . $params['per_page'] . '/class/0/season/0/page/0');
 		}
 	}
 	function show_lessons(){

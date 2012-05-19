@@ -11,6 +11,12 @@ class Install extends CI_Controller{
 				$this->load->view('install/database_setting');
 				$this->load->view('common/footer');
 				break;
+			case 'write_configuration':
+				$header_data = array('param_title'=>'Write Configuration','param_header'=>'Write Configuration');
+				$this->load->view('common/header',$header_data);
+				$this->load->view('install/write_configuration');
+				$this->load->view('common/footer');
+				break;
 			case 'create_tables':
 				$header_data = array('param_title'=>'Create Tables','param_header'=>'Create Tables');
 				$this->load->view('common/header',$header_data);
@@ -31,11 +37,16 @@ class Install extends CI_Controller{
 			case 'database_setting':
 				if($this->database_setting()){
 					if($this->write_database()){
-						redirect('install/index/create_tables');
+						redirect('install/index/write_configuration');
 					}
 					else{
 						echo 'database file should be writable ...';
 					}
+				}
+				break;
+			case 'write_configuration':
+				if($this->write_library_autoload()){
+					redirect('install/index/create_tables');
 				}
 				break;
 			case 'create_tables':
@@ -280,6 +291,9 @@ class Install extends CI_Controller{
 			name varchar(50),
 			date1 date comment "the date this season start",
 			date2 date comment "the date this season end",
+			syllabus_id int,
+			class_id int,
+			is_current varchar(1) default 1,
 			season_description  text
 		)';
 		$result = $this->db->query($query);
@@ -372,6 +386,118 @@ class Install extends CI_Controller{
 			return false;
 		}
 		
+
+		
+		
+		
+		$query = 'drop table if exists ' . $db_prefix . 'syllabuses; ';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'drop syllabuses error ...<br />';
+			return false;
+		}
+		
+		$query = 'create table ' . $db_prefix . 'syllabuses ';
+		$query.= '(id int primary key auto_increment,
+			syllabus_description  text
+			)';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'create table syllabuses error ...<br />';
+			return false;
+		}
+
+		
+		
+		
+		$query = 'drop table if exists ' . $db_prefix . 'lesson_syllabus; ';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'drop lesson_syllabus error ...<br />';
+			return false;
+		}
+		
+		$query = 'create table ' . $db_prefix . 'lesson_syllabus ';
+		$query.= '(id int primary key auto_increment,
+			lesson_id int,
+			syllabus_id int,
+			teacher_id int
+			)';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'create table syllabus error ...<br />';
+			return false;
+		}
+
+		
+		$query = 'drop table if exists ' . $db_prefix . 'examinations; ';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'drop examinations error ...<br />';
+			return false;
+		}
+		
+		$query = 'create table ' . $db_prefix . 'examinations ';
+		$query.= '(id int primary key auto_increment,
+			season_id int,
+			date1 date,
+			date2 date,
+			examination_description text
+			)';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'create table examinations error ...<br />';
+			return false;
+		}
+
+		
+		
+		
+
+		
+		$query = 'drop table if exists ' . $db_prefix . 'examinations_lessons; ';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'drop examinations_lessons error ...<br />';
+			return false;
+		}
+		
+		$query = 'create table ' . $db_prefix . 'examinations_lessons ';
+		$query.= '(id int primary key auto_increment,
+			examination_id int,
+			lesson_id int,
+			date datetime,
+			result decimal,
+			value varchar(3)
+			)';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'create table examinations_lessons error ...<br />';
+			return false;
+		}
+
+		
+		
+		
+
+		
+		$query = 'drop table if exists ' . $db_prefix . 'academic_record; ';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'drop academic_record error ...<br />';
+			return false;
+		}
+		
+		$query = 'create table ' . $db_prefix . 'academic_record ';
+		$query.= '(id int primary key auto_increment,
+			student_id int,
+			season_id int
+			)';
+		$result = $this->db->query($query);
+		if(!$result){
+			echo 'create table examinations error ...<br />';
+			return false;
+		}
 		return true;
 	}
 	function create_admin(){

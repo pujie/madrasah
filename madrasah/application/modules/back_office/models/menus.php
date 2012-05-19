@@ -11,6 +11,8 @@ class Menus extends CI_Model{
 		$menus.= anchor('teachers','Teachers','class="button"');
 		$menus.= anchor('lessons','Lessons','class="button"');
 		$menus.= anchor('seasons','Seasons','class="button"');
+		$menus.= anchor('syllabuses','Syllabuses','class="button"');
+		$menus.= anchor('examinations','Examinations','class="button"');
 		$menus.= '</div>';
 		return $menus;
 	}
